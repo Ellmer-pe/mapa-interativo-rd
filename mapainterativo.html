@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Interativo</title>
+  
+  <!-- Incluindo o Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    /* Garantir que o mapa ocupe toda a tela */
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Div para o mapa -->
+  <div id="map"></div>
+
+  <!-- Incluindo o Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
+  <script>
+    // Criando o mapa e definindo o centro e o zoom inicial
+    var map = L.map('map').setView([20, 0], 2);
+
+    // Adicionando o mapa base (utilizando OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Adicionando um marcador simples no mapa
+    var marker = L.marker([51.5, -0.09]).addTo(map);
+    marker.bindPopup("<b>Você está aqui!</b>").openPopup();
+
+    // Adicionando funcionalidade de zoom e arrasto
+    map.on('click', function(e) {
+      var latlng = e.latlng;
+      alert("Você clicou em " + latlng.lat.toFixed(5) + ", " + latlng.lng.toFixed(5));
+    });
+  </script>
+</body>
+</html>
